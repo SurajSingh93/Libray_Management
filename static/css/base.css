@@ -1,0 +1,21 @@
+/* base */
+.bg{
+    position:relative;
+    top:-20px;
+    height:200px;
+    background: url("../images/img1.jpg") no-repeat center;
+    background-size: cover;
+}
+p{
+ font-style: oblique;
+ font-style: bold;
+ font-size: 20px;
+}
+/* user_profile */
+.content{
+    position:relative;
+    top:-30px;
+}
+.heading{
+    text-align:center;
+}

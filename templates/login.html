@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block title %}Login {% endblock title %}
+
+{% block body %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-4">
+            <form method="POST" action="login">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" class="form-control" id="email" name="email" placeholder="email" required >
+                </div>
+                <div class="form-group">
+                    <label for="pwd">Password</label>
+                    <input type="password" class="form-control" id="pwd" name="pass" placeholder="password" required>
+                </div>
+                <a href=""><button type="submit" class="btn btn-primary">Login</button></a>
+            </form>
+            If not a member ? | <a href="{% url 'register' %}" class="show-link">Register Here</a>
+        </div>
+        <div class="col-md-6"></div>
+        <div class="col-md-2"></div>
+    </div>
+</div>
+
+<script>
+    $('#home-text').hide();
+    $('#log').hide();
+    $('.bg').hide();
+</script>
+
+{% endblock body %}

@@ -1,0 +1,144 @@
+{% extends 'base.html' %}
+
+{% block title %}Register {% endblock title %}
+
+{% block body %}
+<div class="container-fluid">
+    <div class="row content">
+        <div class="col-md-3">
+            <h2 class="heading">Add Books</h2>
+            <hr>
+            <form method="POST" action="">
+                {% csrf_token %}
+                <div class="form-group inline">
+                    <label for="title">Title:</label>
+                    <input type="text" class="form-control" id="title" name="title" placeholder="Enter Title Here" required >
+                </div>
+                <div class="form-group">
+                    <label for="author">Author:</label>
+                    <input type="text" class="form-control" id="author" name="author" placeholder="Enter Author" required >
+                </div>
+                <div class="form-group">
+                    <label for="sel1">Genere:</label>
+                    <select class="form-control" id="sel1" name="sel1">
+                        <option hidden>Select</option>
+                        <option>Fantasy</option>
+                        <option>Science Fiction</option>
+                        <option>Dystopian</option>
+                        <option>Action & Adventure</option>
+                        <option>Mystery</option>
+                        <option>Horror</option>
+                        <option>Thriller & Suspense</option>
+                        <option>Historical Fiction</option>
+                        <option>Romance</option>
+                        <option>Women’s Fiction</option>
+                        <option>LGBTQ+</option>
+                        <option>Contemporary Fiction</option>
+                        <option>Literary Fiction</option>
+                        <option>Magical Realism</option>
+                        <option>Graphic Novel</option>
+                        <option>Short Story</option>
+                        <option>Young Adult</option>
+                        <option>New Adult</option>
+                        <option>Children’s</option>
+                        <option>Memoir & Autobiography</option>
+                        <option>Food & Drink</option>
+                        <option>Art & Photography</option>
+                        <option>Self-help</option>
+                        <option>Travel</option>
+                        <option>True Crime</option>
+                        <option>Humor</option>
+                        <option>Essays</option>
+                        <option>Religion & Spirituality</option>
+                        <option>Humanities & Social Sciences</option>
+                        <option>Parenting & Families</option>
+                        <option>Science & Technology</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="sel2">Type:</label>
+                    <select class="form-control" id="sel2" name="sel2">
+                        <option hidden>Select</option>
+                        <option value="Physical">Physical</option>
+                        <option value="Ebook">Ebook</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="sel3">Review Ratings:</label>
+                    <select class="form-control" id="sel3" name="sel3">
+                        <option hidden>Select</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="review">Review:</label>
+                    <textarea class="form-control" name="review" id="review" rows="2"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="sel4">Favourite:</label>
+                    <select class="form-control" id="sel4" name="sel4">
+                        <option hidden>Select</option>
+                        <option value="True">Yes</option>
+                        <option value="False">No</option>
+                    </select>
+                </div>
+
+                <a href=""><button type="submit" class="btn btn-primary">Add</button></a>
+            </form>
+        </div>
+        <div class="col-md-1"></div>
+        <div class="col-md-8">
+            <h2 class="heading">Collection Dashboard</h2>
+            <hr/>
+
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Author</th>
+                    <th>Genre</th>
+                    <th>Type</th>
+                    <th>Review Stars</th>
+                    <th>Review</th>
+                    <th>Favourite</th>
+                    <th>Action</th>
+                </tr>
+                </thead>
+                {% if data %}
+                <tbody>
+                {% for dt in data %}
+                <tr>
+                    <td>{{dt.title}}</td>
+                    <td>{{dt.author}}</td>
+                    <td>{{dt.genre}}</td>
+                    <td>{{dt.type}}</td>
+                    <td>{{dt.review_rating}}</td>
+                    <td>{{dt.review}}</td>
+                    <td>{{dt.favourite}}</td>
+                    <td>
+                        <a href="{% url 'updatedata' user.id dt.id %}" class="btn btn-warning">Edit</a>
+                        <form method="POST" action="{% url 'deletedata' dt.id %}" class="btn-group">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-danger">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+                </tbody>
+                {% endif %}
+            </table>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    $('#home-text').hide();
+    $('#log').hide();
+    $('.bg').hide();
+</script>
+{% endblock body %}
